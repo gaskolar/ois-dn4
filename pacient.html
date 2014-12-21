@@ -3,7 +3,7 @@
 <html>
 	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	    <title>Recovery Monitor - Zdravnik</title>
+	    <title>Recovery Monitor - Pacient</title>
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="stilZaGraf.css" rel="stylesheet">
@@ -18,76 +18,14 @@
 	</head>
 	<body>
         <!--first commit on dev-->
-		<div class="page-header"><h2>Recovery monitor <small>Zdravnikova stran</small></h2></div>
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega poškodovanca</div>
-							<div class="col-lg-2 col-md-2 col-sm-2">
-                                <select class="form-control input-sm" id="preberiPredlogoBolnika">
-                                    <option value=""></option>
-                                    <option value="Miha,Agon,2000-2-22T02:22">Miha Agon (14 let)</option>
-                                    <option value="Andreja,Čipels,1979-3-30T03:33">Andreja Čipels (35 let)</option>
-                                    <option value="Franci,Ecrs,1939-4-04T04:44">Franci Ecrs (75 let)</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary btn-xs" autocomplete="off">
-                                    Load
-                                </button>
-                            
-                            </div>
-						</div>
-					</div>
-					<div class="panel-body">
-                        <div class="input-group">
-                            <span class="input-group-addon">Ime</span>
-                            <input id="kreirajIme" type="text" class="form-control" placeholder="Osama">
-                        </div><br>
-                        <div class="input-group">
-				            <span class="input-group-addon">Priimek</span>
-                            <input id="kreirajPriimek" type="text" class="form-control" placeholder="Bin Laden">
-                        </div><br>
-                        <div class="input-group">
-				            <span class="input-group-addon">Datum rojstva</span>
-                            <input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08">
-                        </div>
-						<button type="button" class="btn btn-primary btn-xs" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o bolniku</button>
-                        <span id="kreirajSporocilo"></span>
-				  	</div>
-				</div>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Preberi EHR zapis</b> obstoječega bolnika</div>
-							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiObstojeciEHRid">
-                                
-                                   <option value=""></option>
-                                    <option value="08721848-81c5-4708-9832-d79f63c26dd1">Miha Agon (14 let)</option>
-                                    <option value="402e0f47-bfca-435e-8b5b-10df228d80bc">Andreja Čipels (35 let)</option>
-                                    <option value="986bc91e-2b49-403d-bf00-6633f40b20a5">Franci Ecrs (75 let)</option>
-                                </select></div>
-						</div>
-					</div>
-					<div class="panel-body">
-						<span class="label label-default">EHR ID</span>
-                        <input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
-						<button type="button" class="btn btn-primary btn-xs" onclick="preberiEHRodBolnika()">Preberi osnovne podatke o bolniku</button>
-                        <span id="preberiSporocilo"></span>
-				  	</div>
-				</div>
-			</div>
-		</div>
+		<div class="page-header"><h2>Recovery monitor <small>Pacientova stran</small></h2></div>
+		
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Vnos nove meritve</b></div>
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Vnesi novo meritev</b></div>
 							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiObstojeciVitalniZnak">
                                 <option value=""></option>
                                 <option value="08721848-81c5-4708-9832-d79f63c26dd1">Miha Agon (14 let)</option>
@@ -114,7 +52,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Pregled meritev</b> za nekega poškodovanca</div>
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Pregled meritev</b></div>
 							<div class="col-lg-2 col-md-2 col-sm-2">
                                 <select class="form-control input-sm" id="preberiPredlogoBolnikaZaEHR">
                                     <option value=""></option>
