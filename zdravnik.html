@@ -3,27 +3,42 @@
 <html>
 	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	    <title>EhrScape - Vnos in poizvedovanje po EHR podatkih</title>
+	    <title>Dodajanje bolnikov</title>
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="stilZaGraf.css" rel="stylesheet">
 	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	    <script src="demo.js"></script>
+	    <script src="zdravnikJS.js"></script>
+        <script src="http://d3js.org/d3.v3.js"></script>
 	    <style>
 	  		body {padding: 10px;}
 	  		.btn {margin-top: 10px;}
 	  		.obvestilo {margin-left:10px;}
-	  	</style>
+	  	</style>    
 	</head>
 	<body>
         <!--first commit on dev-->
-		<div class="page-header"><h2>Vnos in poizvedovanje po EHR podatkih <small>EhrScape platforma</small></h2></div>
+		<div class="page-header"><h2>Recovery monitor <small>Zdravnikova stran</small></h2></div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega bolnika</div>
-							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiPredlogoBolnika"><option value=""></option><option value="Pujsa,Pepa,1938-10-30T14:58">Pujsa Pepa</option></select></div>
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega poškodovanca</div>
+							<div class="col-lg-2 col-md-2 col-sm-2">
+                                <select class="form-control input-sm" id="preberiPredlogoBolnika">
+                                    <option value=""></option>
+                                    <option value="Miha,Agon,2000-2-22T02:22">Miha Agon (14 let)</option>
+                                    <option value="Andreja,Čipels,1979-3-30T03:33">Andreja Čipels (35 let)</option>
+                                    <option value="Franci,Ecrs,1939-4-04T04:44">Franci Ecrs (75 let)</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary btn-xs" autocomplete="off">
+                                    Load
+                                </button>
+                            
+                            </div>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -49,7 +64,13 @@
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-sm-8"><b>Preberi EHR zapis</b> obstoječega bolnika</div>
-							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiObstojeciEHR"><option value=""></option><option value="254f791d-2e7c-49d9-b646-376f62d6ead5">Dejan Lavbič</option><option value="d564c6a3-5a43-4fcc-bfa7-9ac76e9673bd">Pujsa Pepa</option><option value="b931580f-2b05-488b-985b-8d9ffb08ad02">Ata Smrk</option></select></div>
+							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiObstojeciEHRid">
+                                
+                                   <option value=""></option>
+                                    <option value="08721848-81c5-4708-9832-d79f63c26dd1">Miha Agon (14 let)</option>
+                                    <option value="402e0f47-bfca-435e-8b5b-10df228d80bc">Andreja Čipels (35 let)</option>
+                                    <option value="986bc91e-2b49-403d-bf00-6633f40b20a5">Franci Ecrs (75 let)</option>
+                                </select></div>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -61,13 +82,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-sm-8"><b>Vnos</b> meritve <b>vitalnih znakov</b> bolnika</div>
-							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiObstojeciVitalniZnak"><option value=""></option><option value="b931580f-2b05-488b-985b-8d9ffb08ad02|2014-11-21T11:40Z|185|80.0|36.50|118|92|98|medicinska sestra Smrketa">Ata Smrk</option></select></div>
+							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiObstojeciVitalniZnak">
+                                <option value=""></option>
+                                <option value="08721848-81c5-4708-9832-d79f63c26dd1">Miha Agon (14 let)</option>
+                                    <option value="402e0f47-bfca-435e-8b5b-10df228d80bc">Andreja Čipels (35 let)</option>
+                                    <option value="986bc91e-2b49-403d-bf00-6633f40b20a5">Franci Ecrs (75 let)</option>
+                                </select></div>
 						</div>
 					</div>				
 					<div class="panel-body">
@@ -83,24 +109,51 @@
 						<button type="button" class="btn btn-primary btn-xs" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve vitalnih znakov</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
 				  	</div>
 				</div>
-			</div>	
-			<div class="col-lg-6 col-md-6 col-sm-6">
+			</div>
+           <div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6"><b>Pregled</b> meritev <b>vitalnih znakov</b> bolnika</div>
-							<div class="col-lg-3 col-md-3 col-sm-3"><select class="form-control input-sm" id="preberiTipZaVitalneZnake"><option value="telesna temperatura">telesna temperatura</option><option value="telesna temperatura AQL">telesna temperatura (filter na podhladitev)</option><option value="telesna teža">telesna teža</option></select></div>
-							<div class="col-lg-3 col-md-3 col-sm-3"><select class="form-control input-sm" id="preberiEhrIdZaVitalneZnake"><option value=""></option><option value="b931580f-2b05-488b-985b-8d9ffb08ad02">Ata Smrk</option><option value="d564c6a3-5a43-4fcc-bfa7-9ac76e9673bd">Pujsa Pepa</option></select></div>
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Preberi EHR zapis</b> za nekega poškodovanca</div>
+							<div class="col-lg-2 col-md-2 col-sm-2">
+                                <select class="form-control input-sm" id="preberiPredlogoBolnikaZaEHR">
+                                    <option value=""></option>
+                                    <option value="08721848-81c5-4708-9832-d79f63c26dd1">Miha Agon (14 let)</option>
+                                    <option value="402e0f47-bfca-435e-8b5b-10df228d80bc">Andreja Čipels (35 let)</option>
+                                    <option value="986bc91e-2b49-403d-bf00-6633f40b20a5">Franci Ecrs (75 let)</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <select class="form-control input-sm" id="preberiTip">
+                                    <option value="weight">Teza</option>
+                                    <option value="body_temperature">Temperatura</option>
+                                    <option value="blood_pressure">Krvni pritisk</option>
+                                    <option value="height">Visina</option>
+                                    <option value="spO2">Kisik</option>
+                                    
+                                </select>
+                            </div>
 						</div>
-					</div>				
+					</div>
 					<div class="panel-body">
-						<span class="label label-default">EHR ID</span><input id="meritveVitalnihZnakovEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
-						<button type="button" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov('telesna temperatura')">Preberi meritve vitalnih znakov</button><span id="preberiMeritveVitalnihZnakovSporocilo"></span>
-						<div id="rezultatMeritveVitalnihZnakov"></div>
-                        <span id="preberiMeritveVitalnihZnakovSporocilo"></span>
+                        <div class="input-group">
+                            <span class="input-group-addon">EHR</span>
+                            <input id="preberiEHR" type="text" class="form-control" placeholder="08721848-81c5-4708-9832-d79f63c26dd1">
+                        </div>
+						<button type="button" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Preberi</button>
+                        <span id="kreirajSporocilo"></span>
+                        <div id="grafdiv"></div>
 				  	</div>
-				</div>			
+				</div>
 			</div>
-		</div>
+        </div>
+        <div id="izpis">
+        </div>
+        
 	</body>
 </html>
+
+<!--Miha   08721848-81c5-4708-9832-d79f63c26dd1-->
+<!--Andeja 402e0f47-bfca-435e-8b5b-10df228d80bc-->
+<!--Franci 986bc91e-2b49-403d-bf00-6633f40b20a5-->
+<!--Test   df0b3f2d-f13f-4c60-ac3c-8fda49989a03-->

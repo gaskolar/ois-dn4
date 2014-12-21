@@ -3,12 +3,12 @@
 <html>
 	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	    <title>Dodajanje bolnikov</title>
+	    <title>Branje bolnikov</title>
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="stilZaGraf.css" rel="stylesheet">
 	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	    <script src="dodajanjeJs.js"></script>
+	    <script src="branjeJs.js"></script>
         <script src="http://d3js.org/d3.v3.js"></script>
 	    <style>
 	  		body {padding: 10px;}
@@ -18,44 +18,41 @@
 	</head>
 	<body>
         <!--first commit on dev-->
-		<div class="page-header"><h2>Recovery monitor <small>Dodajanje poškodovancev</small></h2></div>
+		<div class="page-header"><h2>Recovery monitor <small>Branje poškodovancev</small></h2></div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega poškodovanca</div>
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Preberi EHR zapis</b> za nekega poškodovanca</div>
 							<div class="col-lg-2 col-md-2 col-sm-2">
                                 <select class="form-control input-sm" id="preberiPredlogoBolnika">
                                     <option value=""></option>
-                                    <option value="Miha,Agon,2000-2-22T02:22">Miha Agon (14 let)</option>
-                                    <option value="Andreja,Čipels,1979-3-30T03:33">Andreja Čipels (35 let)</option>
-                                    <option value="Franci,Ecrs,1939-4-04T04:44">Franci Ecrs (75 let)</option>
+                                    <option value="08721848-81c5-4708-9832-d79f63c26dd1">Miha Agon (14 let)</option>
+                                    <option value="402e0f47-bfca-435e-8b5b-10df228d80bc">Andreja Čipels (35 let)</option>
+                                    <option value="986bc91e-2b49-403d-bf00-6633f40b20a5">Franci Ecrs (75 let)</option>
                                 </select>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
-                                <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary btn-xs" autocomplete="off">
-                                    Load
-                                </button>
-                            
+                                <select class="form-control input-sm" id="preberiTip">
+                                    <option value="weight">Teza</option>
+                                    <option value="body_temperature">Temperatura</option>
+                                    <option value="blood_pressure">Krvni pritisk</option>
+                                    <option value="height">Visina</option>
+                                    <option value="spO2">Kisik</option>
+                                    
+                                </select>
                             </div>
 						</div>
 					</div>
 					<div class="panel-body">
                         <div class="input-group">
-                            <span class="input-group-addon">Ime</span>
-                            <input id="kreirajIme" type="text" class="form-control" placeholder="Osama">
-                        </div><br>
-                        <div class="input-group">
-				            <span class="input-group-addon">Priimek</span>
-                            <input id="kreirajPriimek" type="text" class="form-control" placeholder="Bin Laden">
-                        </div><br>
-                        <div class="input-group">
-				            <span class="input-group-addon">Datum rojstva</span>
-                            <input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08">
+                            <span class="input-group-addon">EHR</span>
+                            <input id="preberiEHR" type="text" class="form-control" placeholder="08721848-81c5-4708-9832-d79f63c26dd1">
                         </div>
-						<button type="button" class="btn btn-primary btn-xs" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o bolniku</button>
+						<button type="button" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Preberi</button>
                         <span id="kreirajSporocilo"></span>
+                        <div id="grafdiv"></div>
 				  	</div>
 				</div>
 			</div>
@@ -76,23 +73,10 @@
 				</div>
 			</div>
 		</div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="panel panel-default">
-					<div class="panel-heading">
-                        <div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Graf</b> za testne podatke.</div>
-                        </div>
-                    </div>
-                    <div class="panel-body" id="grafdiv">
-                        <svg id="visualisation" width="300" height="200"></svg>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="izpis">
         </div>
-        
+        <div id="rezultatMeritveVitalnihZnakov"></div>
+        <span id="preberiMeritveVitalnihZnakovSporocilo"></span>
 	</body>
 </html>
 
